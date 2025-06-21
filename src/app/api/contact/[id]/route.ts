@@ -7,7 +7,7 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  try { 
     console.log('PATCH request for message ID:', params.id);
     const body = await req.json();
     console.log('Request body:', body);
