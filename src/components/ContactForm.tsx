@@ -23,26 +23,35 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
     setIsSubmitting(true);
     setError(null);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    if (email && message) {
-      console.log("Form submitted:", { email, message });
-      setIsSuccess(true);
-      
-      setTimeout(() => {
-        onSuccess?.();
-        // Reset form after a delay to allow modal to close
-        setTimeout(() => {
-          setIsSuccess(false);
-          setEmail('');
-          setMessage('');
-        }, 500);
-      }, 2000); // Close modal after 2 seconds
-    } else {
+    if (!email || !message) {
       setError('Please fill out all fields.');
+      setIsSubmitting(false);
+      return;
     }
 
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, message }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || 'Failed to send message.');
+      } else {
+        setIsSuccess(true);
+        setTimeout(() => {
+          onSuccess?.();
+          setTimeout(() => {
+            setIsSuccess(false);
+            setEmail('');
+            setMessage('');
+          }, 500);
+        }, 2000);
+      }
+    } catch (err) {
+      setError('Failed to send message.');
+    }
     setIsSubmitting(false);
   };
 
