@@ -51,13 +51,19 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
       <div className="flex flex-col items-center justify-center text-center p-8 h-[240px]">
         <CheckCircle2 className="w-12 h-12 text-green-500 mb-4" />
         <h3 className="text-lg font-semibold">Message Sent</h3>
-        <p className="text-muted-foreground mt-1">We will contact you soon.</p>
+        <p className="text-muted-foreground mt-1">I'll get back to you as soon as possible.</p>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-4">
+      <div className="text-center p-3 bg-muted/30 rounded-lg border">
+        <p className="text-sm text-muted-foreground">
+          You can also email me directly at: <br />
+          <span className="font-medium text-foreground text-base">mudityadev@gmail.com</span>
+        </p>
+      </div>
       <div className="grid gap-2">
         <Label htmlFor="email">Email</Label>
         <Input

@@ -15,6 +15,14 @@ export const metadata: Metadata = {
   keywords: ["Full Stack Developer", "React", "Next.js", "TypeScript", "Node.js", "Muditya Raghav"],
   authors: [{ name: "Muditya Raghav" }],
   creator: "Muditya Raghav",
+  icons: {
+    icon: [
+      { url: '/favicon.png', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' }
+    ],
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
   openGraph: {
     title: "Muditya Raghav - Full Stack Developer",
     description: "Full Stack Developer passionate about creating innovative digital solutions.",
@@ -34,6 +42,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+      </head>
       <body
         className={`${inter.variable} font-sans antialiased`}
       >

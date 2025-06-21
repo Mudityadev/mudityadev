@@ -1,118 +1,64 @@
-import Link from 'next/link';
-import { Github, Linkedin, Twitter, Mail, Heart } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
 const currentYear = new Date().getFullYear();
 
-const footerLinks = {
-  quickLinks: [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '#about' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Contact', href: '#contact' },
-  ],
-  resources: [
-    { label: 'Resume', href: '/resume.pdf' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Portfolio', href: '/portfolio' },
-  ],
-  social: [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: Mail, href: 'mailto:contact@muditya.dev', label: 'Email' },
-  ],
-};
+const socialLinks = [
+  { icon: Github, href: 'https://github.com', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+  { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+  { icon: Mail, href: 'mailto:mudityadev@gmail.com', label: 'Email' },
+  { icon: Phone, href: 'tel:+918770428132', label: 'Phone' },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-muted/50 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand Section */}
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center text-primary-foreground text-sm font-bold">
-                M
-              </div>
-              <span className="text-xl font-bold text-foreground">Muditya</span>
-            </div>
-            <p className="text-muted-foreground mb-6 max-w-md">
-              Full Stack Developer passionate about creating innovative digital solutions. 
-              Let's build something amazing together.
+    <footer className="relative bg-gradient-to-br from-background via-background to-muted/20 border-t border-border/50">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.02)_1px,transparent_0)] bg-[size:20px_20px]" />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Main content */}
+        <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
+          {/* Copyright section */}
+          <div className="text-center lg:text-left">
+            <p className="text-muted-foreground text-sm font-medium">
+              © {currentYear} <span className="text-foreground font-semibold">Muditya Raghav</span>. All rights reserved.
             </p>
-            <div className="flex space-x-2">
-              {footerLinks.social.map((social) => (
+            <p className="text-xs text-muted-foreground/70 mt-1">
+              Next.JS & AI Agent Developer
+            </p>
+          </div>
+
+          {/* Contact links */}
+          <div className="flex items-center space-x-1">
+            {socialLinks.map((social, index) => (
+              <div key={social.label} className="relative">
                 <Button
-                  key={social.label}
                   variant="ghost"
                   size="sm"
+                  className="h-10 w-10 p-0 hover:bg-primary/10 hover:text-primary transition-all duration-200 rounded-full group"
                   asChild
                 >
                   <a
                     href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={social.label === 'Phone' ? undefined : '_blank'}
+                    rel={social.label === 'Phone' ? undefined : 'noopener noreferrer'}
                     aria-label={social.label}
                   >
-                    <social.icon className="w-4 h-4" />
+                    <social.icon className="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
                   </a>
                 </Button>
-              ))}
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-foreground font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {footerLinks.quickLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="text-foreground font-semibold mb-4">Resources</h3>
-            <ul className="space-y-2">
-              {footerLinks.resources.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                    target={link.href.startsWith('http') || link.href.includes('.pdf') ? '_blank' : undefined}
-                    rel={link.href.startsWith('http') || link.href.includes('.pdf') ? 'noopener noreferrer' : undefined}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                {/* Subtle indicator for phone */}
+                {social.label === 'Phone' && (
+                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full border border-background" />
+                )}
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* Bottom Section */}
-        <Separator className="my-8" />
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-muted-foreground text-sm">
-            © {currentYear} Muditya. All rights reserved.
-          </p>
-          <div className="flex items-center space-x-2 text-muted-foreground text-sm">
-            <span>Made with</span>
-            <Heart className="w-4 h-4 text-destructive" />
-            <span>using Next.js & shadcn/ui</span>
-          </div>
-        </div>
-      </div>
+  </div>
     </footer>
   );
 } 
