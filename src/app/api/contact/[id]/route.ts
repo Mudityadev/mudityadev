@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-// import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 // replace the below from above
-import { PrismaClient } from "@/generated/prisma"; 
+// import { PrismaClient } from "@/generated/prisma"; 
 const prisma = new PrismaClient();
 
 export async function PATCH(
