@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Briefcase, Code, Heart, MessageCircle, ThumbsUp, User, Send, AlertCircle } from "lucide-react";
+import { Briefcase, Code, Heart, MessageCircle, ThumbsUp, User, Send, AlertCircle, ExternalLink } from "lucide-react";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,12 +18,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+// import { supabase } from '@/lib/supabaseClient';
 
 const projects = [
   {
     id: 1,
     title: "QQPayment Gateway",
-    github: "Github/QQPay",
+    github: "https://github.com/Mudityadev/QQ-Payment-Gateway",
     description: "Engineered a payment gateway, leveraging Solana Network and Web3, bridging fiat and cryptocurrency for SMEs. Integrated a double-spending deterrent via Solana's Proof of History (PoH) consensus. Enabled frictionless conversions between cryptocurrencies and fiat, democratizing payment choices for businesses.",
     videoEmbed: "https://www.youtube.com/embed/aW69AcN6NV4?si=GwIsM3W6EWPrPD44",
     likes: 42,
@@ -55,7 +57,7 @@ const projects = [
   {
     id: 2,
     title: "Contactless Payment and Checkout System",
-    github: "Github/Justwalkout",
+    github: "https://github.com/Mudityadev/Justwalkout-Cashierless-checkout-system",
     description: "Semi-Finalist, Microsoft Imagine Cup Hackathon 2021. Designed high-performance web applications harnessing Django Rest Framework. Amplified store security by 40% with a virtual cart system, integrating cameras and weight sensors, deterring shoplifting. Slashed checkout queues by 60% with a Face ID-based contactless payment system, elevating shopping experiences.",
     videoEmbed: "https://www.youtube.com/embed/3PC0bQzyaNA?si=zx1QjtD0n7BBP4zh",
     likes: 38,
@@ -176,18 +178,27 @@ export function Profile() {
   const [commentTexts, setCommentTexts] = useState<{ [key: string]: string }>({});
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [loginAlertTimer, setLoginAlertTimer] = useState(4);
+  // const [likeCounts, setLikeCounts] = useState<{ [key: string]: number }>({});
 
-  const handleLike = (itemType: string, itemId: number) => {
+  const handleLike = async (itemType: string, itemId: number) => {
     const key = `${itemType}-${itemId}`;
+    
+    // Show login alert and start timer
+    setShowLoginAlert(true);
+    setLoginAlertTimer(4);
+    
+    // Optimistic update (will be reverted when modal closes)
     setLikedItems(prev => {
       const newSet = new Set(prev);
-      if (newSet.has(key)) {
-        newSet.delete(key);
-      } else {
+      if (!newSet.has(key)) {
         newSet.add(key);
       }
       return newSet;
     });
+    // setLikeCounts(prev => ({
+    //   ...prev,
+    //   [key]: (prev[key] || 0) + 1,
+    // }));
   };
 
   const toggleComments = (itemType: string, itemId: number) => {
@@ -233,6 +244,13 @@ export function Profile() {
     }));
   };
 
+  const handleCloseLoginAlert = () => {
+    setShowLoginAlert(false);
+    // Revert optimistic like updates when modal closes
+    setLikedItems(new Set());
+    // setLikeCounts({});
+  };
+
   // Auto-close timer for login alert
   useEffect(() => {
     if (showLoginAlert && loginAlertTimer > 0) {
@@ -242,7 +260,7 @@ export function Profile() {
 
       return () => clearTimeout(timer);
     } else if (showLoginAlert && loginAlertTimer === 0) {
-      setShowLoginAlert(false);
+      handleCloseLoginAlert();
     }
   }, [showLoginAlert, loginAlertTimer]);
 
@@ -416,7 +434,15 @@ export function Profile() {
                     <div className="pl-6">
                       <div className="flex items-center gap-3 mb-3">
                         <h3 className="font-semibold text-foreground text-lg">{project.title}</h3>
-                        <Badge variant="outline" className="text-xs border-border/50 bg-background/50 rounded-full px-3 py-1">{project.github}</Badge>
+                        <Link 
+                          href={project.github} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs border border-border/50 bg-background/50 hover:bg-primary/10 hover:border-primary/30 text-muted-foreground hover:text-primary rounded-full px-3 py-1 transition-all duration-200"
+                        >
+                          <span>GitHub</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </Link>
                       </div>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-6">{project.description}</p>
                       
@@ -479,7 +505,7 @@ export function Profile() {
       </div>
 
       {/* Login Alert Dialog with Auto-close Timer */}
-      <AlertDialog open={showLoginAlert} onOpenChange={setShowLoginAlert}>
+      <AlertDialog open={showLoginAlert} onOpenChange={(open) => !open && handleCloseLoginAlert()}>
         <AlertDialogContent className="apple-card">
           <AlertDialogHeader>
             <div className="flex items-center gap-3 mb-2">
@@ -498,12 +524,12 @@ export function Profile() {
               </div>
             </div>
             <AlertDialogDescription>
-              You need to be logged in to post comments. Our login system is coming soon!
+              You need to be logged in to like posts and post comments. Our login system is coming soon!
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction 
-              onClick={() => setShowLoginAlert(false)}
+              onClick={handleCloseLoginAlert}
               className="apple-button bg-primary hover:bg-primary/90"
             >
               Got it
