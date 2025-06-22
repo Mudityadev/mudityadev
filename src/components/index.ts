@@ -1,6 +1,8 @@
 // Custom components
 export { default as Navbar } from './Navbar';
 export { default as Footer } from './Footer';
+export { Profile } from './Profile';
+export { ProfileInfo } from './ProfileInfo';
 export { ThemeProvider, useTheme } from './ThemeProvider';
 export { ThemeToggle } from './ThemeToggle';
 

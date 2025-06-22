@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Menu, X, Twitter, Github, Download, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import {
   Dialog,
   DialogContent,
@@ -27,23 +28,33 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link 
-            href="/" 
-            className="flex items-center space-x-3 text-xl font-bold text-foreground hover:text-primary transition-colors"
-            onClick={closeMenu}
-          >
-            <div className="relative">
-              <Avatar className="w-9 h-9">
-                <AvatarImage src="/profile.jpg" alt="Muditya Raghav" />
-                <AvatarFallback>M</AvatarFallback>
-              </Avatar>
-              <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background" />
+          {/* Logo and Visit Counter */}
+          <div className="flex items-center space-x-4">
+            <Link 
+              href="/" 
+              className="flex items-center space-x-3 text-xl font-bold text-foreground hover:text-primary transition-colors"
+              onClick={closeMenu}
+            >
+              <div className="relative">
+                <Avatar className="w-9 h-9">
+                  <AvatarImage src="/profile.jpg" alt="Muditya Raghav" />
+                  <AvatarFallback>M</AvatarFallback>
+                </Avatar>
+                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background" />
+              </div>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
+                <span className="font-semibold">Muditya Raghav</span>
+              </div>
+            </Link>
+            
+            {/* Total Visits Counter - Desktop */}
+            <div className="hidden md:flex items-center">
+              <Badge variant="secondary" className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
+                <Twitter className="w-3.5 h-3.5" />
+                <span className="text-xs font-medium">10k users</span>
+              </Badge>
             </div>
-            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
-              <span className="font-semibold">Muditya Raghav</span>
-            </div>
-          </Link>
+          </div>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
@@ -83,7 +94,12 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Total Visits Counter - Mobile */}
+            <Badge variant="secondary" className="flex items-center gap-1 px-2.5 py-1.5 bg-blue-50 text-blue-700 border-blue-200">
+              <Twitter className="w-3 h-3" />
+              <span className="text-xs font-medium">10k</span>
+            </Badge>
             <Button
               variant="ghost"
               size="sm"

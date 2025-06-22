@@ -1,0 +1,117 @@
+import { BookOpen, Calendar, ArrowRight } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+
+// Dummy blog data (simulating API response)
+const dummyBlogs = [
+  {
+    id: 1,
+    title: "Israel-Iran Tensions: A Deep Dive into Regional Dynamics",
+    excerpt: "Analyzing the complex geopolitical landscape between Israel and Iran, examining historical tensions, nuclear concerns, and the impact on Middle East stability...",
+    date: "2024-01-15",
+    readTime: "7 min read",
+    category: "Geopolitics",
+    thumbnail: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop&crop=center"
+  },
+  {
+    id: 2,
+    title: "India-Iran Relations: Strategic Partnership in a Changing World",
+    excerpt: "Exploring the evolving relationship between India and Iran, from energy cooperation to Chabahar port development and navigating US sanctions...",
+    date: "2024-01-10",
+    readTime: "6 min read",
+    category: "Diplomacy",
+    thumbnail: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&h=200&fit=crop&crop=center"
+  },
+  {
+    id: 3,
+    title: "The New Silk Road: China's Belt and Road Initiative Impact",
+    excerpt: "Examining China's ambitious infrastructure project and its implications for global trade, regional power dynamics, and international relations...",
+    date: "2024-01-05",
+    readTime: "8 min read",
+    category: "International Relations",
+    thumbnail: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop&crop=center"
+  }
+];
+
+export function ProfileInfo() {
+  return (
+    <Card className="p-4 lg:w-1/3">
+      <CardContent className="p-0">
+        <div className="space-y-4">
+          {/* Blog Section Header */}
+          <div className="flex items-center gap-2 mb-4">
+            <BookOpen className="h-5 w-5 text-primary" />
+            <h2 className="text-lg font-semibold">Latest Blog Posts</h2>
+          </div>
+
+          {/* Blog Posts */}
+          {dummyBlogs.map((blog) => (
+            <article key={blog.id} className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+              {/* Blog Thumbnail */}
+              <div className="relative w-full h-32 bg-muted">
+                <Image
+                  src={blog.thumbnail}
+                  alt={blog.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              
+              <div className="p-4 space-y-2">
+                {/* Blog Meta */}
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className="bg-primary/10 text-primary px-2 py-1 rounded">
+                    {blog.category}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    {new Date(blog.date).toLocaleDateString('en-US', { 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
+                  </div>
+                  <span>•</span>
+                  <span>{blog.readTime}</span>
+                </div>
+
+                {/* Blog Title */}
+                <h3 className="font-semibold text-sm leading-tight text-foreground hover:text-primary transition-colors cursor-pointer">
+                  {blog.title}
+                </h3>
+
+                {/* Blog Excerpt */}
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                  {blog.excerpt}
+                </p>
+
+                {/* Read More Button */}
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="h-6 px-2 text-xs text-primary hover:text-primary/80 p-0"
+                >
+                  Read More
+                  <ArrowRight className="h-3 w-3 ml-1" />
+                </Button>
+              </div>
+            </article>
+          ))}
+
+          {/* View All Posts Button */}
+          <div className="pt-2">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="w-full text-xs"
+            >
+              View All Blog Posts
+              <ArrowRight className="h-3 w-3 ml-1" />
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+} 
