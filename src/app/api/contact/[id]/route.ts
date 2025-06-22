@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
-// replace the below from above
-// import { PrismaClient } from "@/generated/prisma"; 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
+
+export const prisma =
+  globalForPrisma.prisma ?? new PrismaClient();
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
 export async function PATCH(
   req: NextRequest,
@@ -11,22 +18,25 @@ export async function PATCH(
 ) {
   try { 
     console.log('PATCH request for message ID:', params.id);
-    const body = await req.json();
-    console.log('Request body:', body);
+    // const body = await req.json();
+    // console.log('Request body:', body);
     
-    const { replied } = body;
+    // const { replied } = body;
     
-    if (typeof replied !== 'boolean') {
-      return NextResponse.json({ error: 'replied field must be a boolean' }, { status: 400 });
-    }
+    // if (typeof replied !== 'boolean') {
+    //   return NextResponse.json({ error: 'replied field must be a boolean' }, { status: 400 });
+    // }
     
-    const contact = await prisma.contact.update({
-      where: { id: params.id },
-      data: { replied },
-    });
+    // const contact = await prisma.contact.update({
+    //   where: { id: params.id },
+    //   data: { replied },
+    // });
     
-    console.log('Updated contact:', contact);
-    return NextResponse.json({ success: true, contact });
+    // console.log('Updated contact:', contact);
+    // return NextResponse.json({ success: true, contact });
+    
+    // Temporary response while implementation is commented out
+    return NextResponse.json({ message: 'PATCH endpoint not yet implemented' });
   } catch (error) {
     console.error('Error updating message:', error);
     return NextResponse.json({ error: 'Failed to update message.' }, { status: 500 });
@@ -38,10 +48,14 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    await prisma.contact.delete({
-      where: { id: params.id },
-    });
-    return NextResponse.json({ success: true });
+    console.log('DELETE request for message ID:', params.id);
+    // await prisma.contact.delete({
+    //   where: { id: params.id },
+    // });
+    // return NextResponse.json({ success: true });
+    
+    // Temporary response while implementation is commented out
+    return NextResponse.json({ message: 'DELETE endpoint not yet implemented' });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to delete message.' }, { status: 500 });
   }
