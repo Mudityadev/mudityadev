@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Briefcase, Code, Heart, MessageCircle, ThumbsUp, User, Send, AlertCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -175,6 +175,7 @@ export function Profile() {
   const [showComments, setShowComments] = useState<Set<string>>(new Set());
   const [commentTexts, setCommentTexts] = useState<{ [key: string]: string }>({});
   const [showLoginAlert, setShowLoginAlert] = useState(false);
+  const [loginAlertTimer, setLoginAlertTimer] = useState(4);
 
   const handleLike = (itemType: string, itemId: number) => {
     const key = `${itemType}-${itemId}`;
@@ -221,8 +222,9 @@ export function Profile() {
     
     if (!commentText) return;
     
-    // Show login alert
+    // Show login alert and start timer
     setShowLoginAlert(true);
+    setLoginAlertTimer(4);
     
     // Clear the comment text
     setCommentTexts(prev => ({
@@ -230,6 +232,19 @@ export function Profile() {
       [key]: ''
     }));
   };
+
+  // Auto-close timer for login alert
+  useEffect(() => {
+    if (showLoginAlert && loginAlertTimer > 0) {
+      const timer = setTimeout(() => {
+        setLoginAlertTimer(loginAlertTimer - 1);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    } else if (showLoginAlert && loginAlertTimer === 0) {
+      setShowLoginAlert(false);
+    }
+  }, [showLoginAlert, loginAlertTimer]);
 
   const CommentSection = ({ comments }: { comments: any[] }) => (
     <div className="mt-4 space-y-3">
@@ -463,7 +478,7 @@ export function Profile() {
         </div>
       </div>
 
-      {/* Login Alert Dialog */}
+      {/* Login Alert Dialog with Auto-close Timer */}
       <AlertDialog open={showLoginAlert} onOpenChange={setShowLoginAlert}>
         <AlertDialogContent className="apple-card">
           <AlertDialogHeader>
@@ -471,7 +486,16 @@ export function Profile() {
               <div className="p-2 bg-orange-500/10 rounded-full">
                 <AlertCircle className="h-5 w-5 text-orange-500" />
               </div>
-              <AlertDialogTitle>Login Required</AlertDialogTitle>
+              <div className="flex-1">
+                <AlertDialogTitle className="flex items-center justify-between">
+                  Login Required
+                  {loginAlertTimer > 0 && (
+                    <span className="text-sm font-normal text-orange-500 bg-orange-500/10 px-2 py-1 rounded-full">
+                      Auto-close in {loginAlertTimer}s
+                    </span>
+                  )}
+                </AlertDialogTitle>
+              </div>
             </div>
             <AlertDialogDescription>
               You need to be logged in to post comments. Our login system is coming soon!
