@@ -12,24 +12,24 @@ const dummyBlogs = [
     date: "2024-01-15",
     readTime: "7 min read",
     category: "Geopolitics",
-    thumbnail: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop&crop=center"
+    thumbnail: "/israel-war.jpg"
   },
   {
     id: 2,
-    title: "India-Iran Relations: Strategic Partnership in a Changing World",
-    excerpt: "Exploring the evolving relationship between India and Iran, from energy cooperation to Chabahar port development and navigating US sanctions...",
-    date: "2024-01-10",
-    readTime: "6 min read",
-    category: "Diplomacy",
+    title: "Ukraine-Russia Conflict: The Evolution of Modern Warfare",
+    excerpt: "Analyzing the technological and strategic developments in the Ukraine-Russia conflict, from drone warfare to cyber attacks and their global implications...",
+    date: "2024-01-20",
+    readTime: "9 min read",
+    category: "War Analysis",
     thumbnail: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&h=200&fit=crop&crop=center"
   },
   {
     id: 3,
-    title: "The New Silk Road: China's Belt and Road Initiative Impact",
-    excerpt: "Examining China's ambitious infrastructure project and its implications for global trade, regional power dynamics, and international relations...",
-    date: "2024-01-05",
-    readTime: "8 min read",
-    category: "International Relations",
+    title: "The Gaza Crisis: Humanitarian Impact and International Response",
+    excerpt: "Examining the humanitarian consequences of the Gaza conflict, international aid efforts, and the challenges of providing assistance in conflict zones...",
+    date: "2024-01-18",
+    readTime: "10 min read",
+    category: "Humanitarian",
     thumbnail: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop&crop=center"
   }
 ];
