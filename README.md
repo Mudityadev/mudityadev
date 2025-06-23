@@ -1,13 +1,12 @@
-# 👋 Hi, I’m Muditya Raghav ([@Mudityadev](https://mudityadev.vercel.app/))
+# 👋 Hi, I’m Muditya Raghav ([Portfolio](https://mudityadev.vercel.app/))
 
 ## 🧑🏻‍💻 Work Domains:
-- **Introduction:** Freelance QA/NextJS | Open to Projects | Email : Mudityadev@gmail.com | Twitter : [@Mudityadev](https://twitter.com/Mudityadev)
-- **Real-Time Web Applications:** Using NextJS, TypeScript, AI APIs
+- **Introduction:** AI Agent / Next.js Developer | Open to Work  
+  📧 Email: [mudityadev@gmail.com](mailto:mudityadev@gmail.com)  
+  🐦 Twitter: [@Mudityadev](https://twitter.com/Mudityadev)
+- **Expertise:** Real-Time Web Applications using Next.js, TypeScript, and AI APIs
 
-
-  
 ## 📫 How to reach me:
 - 📧 Email: [mudityadev@gmail.com](mailto:mudityadev@gmail.com)
 - 🐦 Twitter: [@Mudityadev](https://twitter.com/Mudityadev)
-- 🔬 Research : [@MudityaRaghav](https://www.researchgate.net/profile/Muditya-Raghav)
-- 💻 Linkedin : [@MudityaRaghav](https://www.linkedin.com/in/mudityadevindia/)
+- 🔬 Research: [@MudityaRaghav on ResearchGate](https://www.researchgate.net/profile/Muditya-Raghav)
