@@ -568,6 +568,17 @@ export function Profile() {
                               <ExternalLink className="w-3 h-3" />
                             </Link>
                           )}
+                          {project.title === "PainPain Ransomware PoC" && (
+                            <Link
+                              href="https://pain-pain-web.vercel.app/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-xs border border-border/50 bg-background/50 hover:bg-green-100 hover:border-green-400 text-green-700 hover:text-green-900 rounded-full px-3 py-1 transition-all duration-200"
+                            >
+                              <span>Web Demo</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </Link>
+                          )}
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed mb-6">{project.description}</p>
                         
