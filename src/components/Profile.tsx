@@ -148,18 +148,10 @@ const experience = [
     location: "Hyderabad, Telangana",
     duration: "Aug 2019– May 2023",
     points: [
-      {
-        icon: <FlaskConical className="w-4 h-4 text-blue-600" />, text: "Automated feature and functional testing using advanced LLM in Automator AI"
-      },
-      {
-        icon: <CloudCog className="w-4 h-4 text-green-600" />, text: "Enhanced REST API testing for improved application reliability"
-      },
-      {
-        icon: <ListChecks className="w-4 h-4 text-purple-600" />, text: "Developed and executed comprehensive test cases (800+), scenarios, and user story validations"
-      },
-      {
-        icon: <ShieldCheck className="w-4 h-4 text-yellow-600" />, text: "Conducted functionality, regression, integration, UAT, smoke, and performance testing for robust software validation"
-      }
+      { icon: <FlaskConical className="w-4 h-4 text-blue-600" />, text: "Automated feature and functional testing using advanced LLM in Automator AI" },
+      { icon: <CloudCog className="w-4 h-4 text-green-600" />, text: "Enhanced REST API testing for improved application reliability" },
+      { icon: <ListChecks className="w-4 h-4 text-purple-600" />, text: "Developed and executed comprehensive test cases (800+), scenarios, and user story validations" },
+      { icon: <ShieldCheck className="w-4 h-4 text-yellow-600" />, text: "Conducted functionality, regression, integration, UAT, smoke, and performance testing for robust software validation" }
     ],
     likes: 56,
     comments: [
@@ -186,15 +178,9 @@ const experience = [
     location: "Remote",
     duration: "April 2022– June 2022",
     points: [
-      {
-        icon: <ListChecks className="w-4 h-4 text-blue-600" />, text: "Revolutionized testing tools in Excel, automating intricate data analyses and manipulations"
-      },
-      {
-        icon: <Timer className="w-4 h-4 text-green-600" />, text: "Achieved a significant 90% reduction in testing durations, streamlining a 3-hour process to just 30 min"
-      },
-      {
-        icon: <CloudCog className="w-4 h-4 text-purple-600" />, text: "Employed Python3, complemented by Pandas, for adept data handling and script optimization"
-      }
+      { icon: <ListChecks className="w-4 h-4 text-blue-600" />, text: "Revolutionized testing tools in Excel, automating intricate data analyses and manipulations" },
+      { icon: <Timer className="w-4 h-4 text-green-600" />, text: "Achieved a significant 90% reduction in testing durations, streamlining a 3-hour process to just 30 min" },
+      { icon: <CloudCog className="w-4 h-4 text-purple-600" />, text: "Employed Python3, complemented by Pandas, for adept data handling and script optimization" }
     ],
     likes: 34,
     comments: [
@@ -214,12 +200,8 @@ const experience = [
     location: "Remote",
     duration: "April 2021– July 2021",
     points: [
-      {
-        icon: <ShieldCheck className="w-4 h-4 text-blue-600" />, text: "Conducted meticulous security evaluations on E-com websites, utilizing expert tools like Burp Suite and Nmap"
-      },
-      {
-        icon: <Zap className="w-4 h-4 text-yellow-600" />, text: "Stepped into the realm of bug bounty, contributing to Paypal's vulnerability identification program via HackerOne"
-      }
+      { icon: <ShieldCheck className="w-4 h-4 text-blue-600" />, text: "Conducted meticulous security evaluations on E-com websites, utilizing expert tools like Burp Suite and Nmap" },
+      { icon: <Zap className="w-4 h-4 text-yellow-600" />, text: "Stepped into the realm of bug bounty, contributing to Paypal's vulnerability identification program via HackerOne" }
     ],
     likes: 47,
     comments: [
@@ -484,7 +466,7 @@ export function Profile() {
                           {exp.points.map((point, pointIndex) => (
                             <li key={pointIndex} className="flex items-start gap-3">
                               {point.icon}
-                              <span className="leading-relaxed">{point.text || point}</span>
+                              <span className="leading-relaxed">{point.text}</span>
                             </li>
                           ))}
                         </ul>
