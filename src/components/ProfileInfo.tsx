@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState } from "react";
 import { BlogModal } from "./BlogModal";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 // Dummy blog data (simulating API response)
 const dummyBlogs = [
@@ -38,7 +39,7 @@ const dummyBlogs = [
   }
 ];
 
-export function ProfileInfo() {
+export function ProfileInfo({ loading = false }: { loading?: boolean }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState<string>('');
 
@@ -51,6 +52,32 @@ export function ProfileInfo() {
     setIsModalOpen(false);
     setSelectedBlog('');
   };
+
+  if (loading) {
+    return (
+      <Card className="apple-card border-border/30 shadow-lg lg:w-1/3">
+        <CardContent className="p-6">
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 mb-6">
+              <Skeleton className="h-8 w-8 rounded-xl" />
+              <Skeleton className="h-6 w-48" />
+            </div>
+            {Array.from({ length: 3 }).map((_, idx) => (
+              <div key={idx} className="mb-6">
+                <Skeleton className="h-40 w-full mb-3 rounded-xl" />
+                <Skeleton className="h-4 w-1/2 mb-2" />
+                <Skeleton className="h-4 w-1/3 mb-2" />
+                <Skeleton className="h-6 w-3/4 mb-2" />
+                <Skeleton className="h-4 w-full mb-2" />
+                <Skeleton className="h-8 w-24 rounded-full" />
+              </div>
+            ))}
+            <Skeleton className="h-8 w-full rounded-full" />
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <>

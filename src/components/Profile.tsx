@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Briefcase, Code, Heart, MessageCircle, ThumbsUp, User, Send, AlertCircle, ExternalLink, Trophy, ShoppingCart, Camera, Timer, Banknote, Link2, ShieldCheck, Zap, Puzzle, Search, Lock, Monitor, FileUp, Trash2 } from "lucide-react";
+import { Briefcase, Code, Heart, MessageCircle, ThumbsUp, User, Send, AlertCircle, ExternalLink, Trophy, ShoppingCart, Camera, Timer, Banknote, Link2, ShieldCheck, Zap, Puzzle, Search, Lock, Monitor, FileUp, Trash2, FlaskConical, CloudCog, ListChecks } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +18,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Skeleton } from "@/components/ui/Skeleton";
 // import { supabase } from '@/lib/supabaseClient';
 
 const projects = [
@@ -147,10 +148,18 @@ const experience = [
     location: "Hyderabad, Telangana",
     duration: "Aug 2019– May 2023",
     points: [
-      "Automated feature and functional testing using advanced LLM in Automator AI",
-      "Enhanced REST API testing for improved application reliability",
-      "Developed and executed comprehensive test cases (800+), scenarios, and user story validations",
-      "Conducted functionality, regression, integration, UAT, smoke, and performance testing for robust software validation"
+      {
+        icon: <FlaskConical className="w-4 h-4 text-blue-600" />, text: "Automated feature and functional testing using advanced LLM in Automator AI"
+      },
+      {
+        icon: <CloudCog className="w-4 h-4 text-green-600" />, text: "Enhanced REST API testing for improved application reliability"
+      },
+      {
+        icon: <ListChecks className="w-4 h-4 text-purple-600" />, text: "Developed and executed comprehensive test cases (800+), scenarios, and user story validations"
+      },
+      {
+        icon: <ShieldCheck className="w-4 h-4 text-yellow-600" />, text: "Conducted functionality, regression, integration, UAT, smoke, and performance testing for robust software validation"
+      }
     ],
     likes: 56,
     comments: [
@@ -177,9 +186,15 @@ const experience = [
     location: "Remote",
     duration: "April 2022– June 2022",
     points: [
-      "Revolutionized testing tools in Excel, automating intricate data analyses and manipulations",
-      "Achieved a significant 90% reduction in testing durations, streamlining a 3-hour process to just 30 min",
-      "Employed Python3, complemented by Pandas, for adept data handling and script optimization"
+      {
+        icon: <ListChecks className="w-4 h-4 text-blue-600" />, text: "Revolutionized testing tools in Excel, automating intricate data analyses and manipulations"
+      },
+      {
+        icon: <Timer className="w-4 h-4 text-green-600" />, text: "Achieved a significant 90% reduction in testing durations, streamlining a 3-hour process to just 30 min"
+      },
+      {
+        icon: <CloudCog className="w-4 h-4 text-purple-600" />, text: "Employed Python3, complemented by Pandas, for adept data handling and script optimization"
+      }
     ],
     likes: 34,
     comments: [
@@ -199,8 +214,12 @@ const experience = [
     location: "Remote",
     duration: "April 2021– July 2021",
     points: [
-      "Conducted meticulous security evaluations on E-com websites, utilizing expert tools like Burp Suite and Nmap",
-      "Stepped into the realm of bug bounty, contributing to Paypal's vulnerability identification program via HackerOne"
+      {
+        icon: <ShieldCheck className="w-4 h-4 text-blue-600" />, text: "Conducted meticulous security evaluations on E-com websites, utilizing expert tools like Burp Suite and Nmap"
+      },
+      {
+        icon: <Zap className="w-4 h-4 text-yellow-600" />, text: "Stepped into the realm of bug bounty, contributing to Paypal's vulnerability identification program via HackerOne"
+      }
     ],
     likes: 47,
     comments: [
@@ -228,7 +247,14 @@ export function Profile() {
   const [commentTexts, setCommentTexts] = useState<{ [key: string]: string }>({});
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [loginAlertTimer, setLoginAlertTimer] = useState(4);
-  // const [likeCounts, setLikeCounts] = useState<{ [key: string]: number }>({});
+  // Skeleton loading state
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading for demonstration
+    const timer = setTimeout(() => setLoading(false), 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleLike = async (itemType: string, itemId: number) => {
     const key = `${itemType}-${itemId}`;
@@ -394,7 +420,23 @@ export function Profile() {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left Side - Profile Info Component */}
-          <ProfileInfo />
+          {loading ? (
+            <div className="lg:w-1/3 space-y-6">
+              <Skeleton className="h-10 w-48 mb-6" />
+              {Array.from({ length: 3 }).map((_, idx) => (
+                <div key={idx} className="mb-6">
+                  <Skeleton className="h-40 w-full mb-3 rounded-xl" />
+                  <Skeleton className="h-6 w-3/4 mb-2" />
+                  <Skeleton className="h-4 w-1/2 mb-2" />
+                  <Skeleton className="h-4 w-full mb-2" />
+                  <Skeleton className="h-8 w-24 rounded-full" />
+                </div>
+              ))}
+              <Skeleton className="h-8 w-full rounded-full" />
+            </div>
+          ) : (
+            <ProfileInfo loading={loading} />
+          )}
 
           {/* Right Side - Content */}
           <div className="lg:w-2/3 space-y-6">
@@ -409,61 +451,82 @@ export function Profile() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                {experience.map((exp, index) => (
-                  <div key={index} className="relative">
-                    <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-primary/60 to-primary/20 rounded-full"></div>
-                    <div className="pl-6">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-foreground text-lg">{exp.role}</h3>
-                        <Badge variant="secondary" className="text-xs bg-muted/50 border-border/30 rounded-full px-3 py-1">{exp.duration}</Badge>
+                {loading ? (
+                  Array.from({ length: 3 }).map((_, idx) => (
+                    <div key={idx} className="relative">
+                      <div className="pl-6">
+                        <div className="flex items-center gap-3 mb-2">
+                          <Skeleton className="h-6 w-40 mb-2" />
+                          <Skeleton className="h-6 w-24" />
+                        </div>
+                        <Skeleton className="h-4 w-1/2 mb-3" />
+                        <Skeleton className="h-4 w-3/4 mb-2" />
+                        <Skeleton className="h-4 w-2/3 mb-2" />
+                        <Skeleton className="h-4 w-1/3 mb-2" />
+                        <div className="flex items-center gap-4 pt-3">
+                          <Skeleton className="h-8 w-20 rounded-full" />
+                          <Skeleton className="h-8 w-20 rounded-full" />
+                        </div>
                       </div>
-                      <p className="text-sm text-primary font-medium mb-3">{exp.company} – {exp.location}</p>
-                      <ul className="text-sm text-muted-foreground space-y-2 mb-4">
-                        {exp.points.map((point, pointIndex) => (
-                          <li key={pointIndex} className="flex items-start gap-3">
-                            <div className="w-1.5 h-1.5 bg-primary/60 rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="leading-relaxed">{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      {/* Like and Comment Buttons */}
-                      <div className="flex items-center gap-4 pt-3 border-t border-border/20">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleLike('experience', exp.id)}
-                          className={`flex items-center gap-2 h-8 px-3 rounded-full transition-all duration-200 ${
-                            likedItems.has(`experience-${exp.id}`)
-                              ? 'text-red-500 bg-red-500/10 hover:bg-red-500/20'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                          }`}
-                        >
-                          <Heart className={`w-4 h-4 ${likedItems.has(`experience-${exp.id}`) ? 'fill-current' : ''}`} />
-                          <span className="text-sm font-medium">{getLikesCount('experience', exp.id, exp.likes)}</span>
-                        </Button>
-                        
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => toggleComments('experience', exp.id)}
-                          className="flex items-center gap-2 h-8 px-3 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-                        >
-                          <MessageCircle className="w-4 h-4" />
-                          <span className="text-sm font-medium">{exp.comments.length}</span>
-                        </Button>
-                      </div>
-
-                      {/* Comments Section */}
-                      {showComments.has(`experience-${exp.id}`) && (
-                        <>
-                          <CommentSection comments={exp.comments} />
-                          <CommentField itemType="experience" itemId={exp.id} />
-                        </>
-                      )}
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  experience.map((exp, index) => (
+                    <div key={index} className="relative">
+                      <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-primary/60 to-primary/20 rounded-full"></div>
+                      <div className="pl-6">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="font-semibold text-foreground text-lg">{exp.role}</h3>
+                          <Badge variant="secondary" className="text-xs bg-muted/50 border-border/30 rounded-full px-3 py-1">{exp.duration}</Badge>
+                        </div>
+                        <p className="text-sm text-primary font-medium mb-3">{exp.company} – {exp.location}</p>
+                        <ul className="text-sm text-muted-foreground space-y-2 mb-4">
+                          {exp.points.map((point, pointIndex) => (
+                            <li key={pointIndex} className="flex items-start gap-3">
+                              {point.icon}
+                              <span className="leading-relaxed">{point.text || point}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        {/* Like and Comment Buttons */}
+                        <div className="flex items-center gap-4 pt-3 border-t border-border/20">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleLike('experience', exp.id)}
+                            className={`flex items-center gap-2 h-8 px-3 rounded-full transition-all duration-200 ${
+                              likedItems.has(`experience-${exp.id}`)
+                                ? 'text-red-500 bg-red-500/10 hover:bg-red-500/20'
+                                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                            }`}
+                          >
+                            <Heart className={`w-4 h-4 ${likedItems.has(`experience-${exp.id}`) ? 'fill-current' : ''}`} />
+                            <span className="text-sm font-medium">{getLikesCount('experience', exp.id, exp.likes)}</span>
+                          </Button>
+                          
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleComments('experience', exp.id)}
+                            className="flex items-center gap-2 h-8 px-3 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+                          >
+                            <MessageCircle className="w-4 h-4" />
+                            <span className="text-sm font-medium">{exp.comments.length}</span>
+                          </Button>
+                        </div>
+
+                        {/* Comments Section */}
+                        {showComments.has(`experience-${exp.id}`) && (
+                          <>
+                            <CommentSection comments={exp.comments} />
+                            <CommentField itemType="experience" itemId={exp.id} />
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                )}
               </CardContent>
             </Card>
 
@@ -478,95 +541,115 @@ export function Profile() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-8">
-                {projects.map((project, index) => (
-                  <div key={index} className="relative">
-                    <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-primary/60 to-primary/20 rounded-full"></div>
-                    <div className="pl-6">
-                      <div className="flex items-center gap-3 mb-3">
-                        <h3 className="font-semibold text-foreground text-lg">{project.title}</h3>
-                        <Link 
-                          href={project.github} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-xs border border-border/50 bg-background/50 hover:bg-primary/10 hover:border-primary/30 text-muted-foreground hover:text-primary rounded-full px-3 py-1 transition-all duration-200"
-                        >
-                          <span>GitHub</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </Link>
-                        {project.title === "QQShare" && (
-                          <Link
-                            href="https://qq-share.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs border border-border/50 bg-background/50 hover:bg-green-100 hover:border-green-400 text-green-700 hover:text-green-900 rounded-full px-3 py-1 transition-all duration-200"
-                          >
-                            <span>Web Demo</span>
-                            <ExternalLink className="w-3 h-3" />
-                          </Link>
-                        )}
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-6">{project.description}</p>
-                      
-                      {/* Video/Image Preview */}
-                      <div className="relative w-full overflow-hidden rounded-2xl border border-border/20 shadow-lg mb-4">
-                        <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                          {project.title === "QQShare" ? (
-                            <img
-                              src="/QQShare_Demo.jpg"
-                              alt="QQShare Demo"
-                              className="absolute top-0 left-0 w-full h-full object-cover"
-                            />
-                          ) : (
-                            <iframe
-                              className="absolute top-0 left-0 w-full h-full"
-                              src={project.videoEmbed}
-                              title={`${project.title} Demo`}
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              referrerPolicy="strict-origin-when-cross-origin"
-                              allowFullScreen
-                            />
-                          )}
+                {loading ? (
+                  // Skeletons for loading state
+                  Array.from({ length: 4 }).map((_, idx) => (
+                    <div key={idx} className="relative">
+                      <div className="pl-6">
+                        <div className="flex items-center gap-3 mb-3">
+                          <Skeleton className="h-6 w-40 mb-2" />
+                          <Skeleton className="h-6 w-16" />
+                        </div>
+                        <Skeleton className="h-4 w-3/4 mb-4" />
+                        <Skeleton className="h-48 w-full rounded-2xl mb-4" />
+                        <div className="flex items-center gap-4 pt-3">
+                          <Skeleton className="h-8 w-20 rounded-full" />
+                          <Skeleton className="h-8 w-20 rounded-full" />
                         </div>
                       </div>
-
-                      {/* Like and Comment Buttons */}
-                      <div className="flex items-center gap-4 pt-3 border-t border-border/20">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleLike('project', project.id)}
-                          className={`flex items-center gap-2 h-8 px-3 rounded-full transition-all duration-200 ${
-                            likedItems.has(`project-${project.id}`)
-                              ? 'text-red-500 bg-red-500/10 hover:bg-red-500/20'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                          }`}
-                        >
-                          <Heart className={`w-4 h-4 ${likedItems.has(`project-${project.id}`) ? 'fill-current' : ''}`} />
-                          <span className="text-sm font-medium">{getLikesCount('project', project.id, project.likes)}</span>
-                        </Button>
-                        
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => toggleComments('project', project.id)}
-                          className="flex items-center gap-2 h-8 px-3 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-                        >
-                          <MessageCircle className="w-4 h-4" />
-                          <span className="text-sm font-medium">{project.comments.length}</span>
-                        </Button>
-                      </div>
-
-                      {/* Comments Section */}
-                      {showComments.has(`project-${project.id}`) && (
-                        <>
-                          <CommentSection comments={project.comments} />
-                          <CommentField itemType="project" itemId={project.id} />
-                        </>
-                      )}
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  projects.map((project, index) => (
+                    <div key={index} className="relative">
+                      <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-primary/60 to-primary/20 rounded-full"></div>
+                      <div className="pl-6">
+                        <div className="flex items-center gap-3 mb-3">
+                          <h3 className="font-semibold text-foreground text-lg">{project.title}</h3>
+                          <Link 
+                            href={project.github} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs border border-border/50 bg-background/50 hover:bg-primary/10 hover:border-primary/30 text-muted-foreground hover:text-primary rounded-full px-3 py-1 transition-all duration-200"
+                          >
+                            <span>GitHub</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </Link>
+                          {project.title === "QQShare" && (
+                            <Link
+                              href="https://qq-share.vercel.app/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-xs border border-border/50 bg-background/50 hover:bg-green-100 hover:border-green-400 text-green-700 hover:text-green-900 rounded-full px-3 py-1 transition-all duration-200"
+                            >
+                              <span>Web Demo</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </Link>
+                          )}
+                        </div>
+                        <p className="text-sm text-muted-foreground leading-relaxed mb-6">{project.description}</p>
+                        
+                        {/* Video/Image Preview */}
+                        <div className="relative w-full overflow-hidden rounded-2xl border border-border/20 shadow-lg mb-4">
+                          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                            {project.title === "QQShare" ? (
+                              <img
+                                src="/QQShare_Demo.jpg"
+                                alt="QQShare Demo"
+                                className="absolute top-0 left-0 w-full h-full object-cover"
+                              />
+                            ) : (
+                              <iframe
+                                className="absolute top-0 left-0 w-full h-full"
+                                src={project.videoEmbed}
+                                title={`${project.title} Demo`}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen
+                              />
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Like and Comment Buttons */}
+                        <div className="flex items-center gap-4 pt-3 border-t border-border/20">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleLike('project', project.id)}
+                            className={`flex items-center gap-2 h-8 px-3 rounded-full transition-all duration-200 ${
+                              likedItems.has(`project-${project.id}`)
+                                ? 'text-red-500 bg-red-500/10 hover:bg-red-500/20'
+                                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                            }`}
+                          >
+                            <Heart className={`w-4 h-4 ${likedItems.has(`project-${project.id}`) ? 'fill-current' : ''}`} />
+                            <span className="text-sm font-medium">{getLikesCount('project', project.id, project.likes)}</span>
+                          </Button>
+                          
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleComments('project', project.id)}
+                            className="flex items-center gap-2 h-8 px-3 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+                          >
+                            <MessageCircle className="w-4 h-4" />
+                            <span className="text-sm font-medium">{project.comments.length}</span>
+                          </Button>
+                        </div>
+
+                        {/* Comments Section */}
+                        {showComments.has(`project-${project.id}`) && (
+                          <>
+                            <CommentSection comments={project.comments} />
+                            <CommentField itemType="project" itemId={project.id} />
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                )}
               </CardContent>
             </Card>
           </div>
