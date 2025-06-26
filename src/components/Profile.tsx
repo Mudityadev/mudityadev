@@ -21,6 +21,41 @@ import {
 // import { supabase } from '@/lib/supabaseClient';
 
 const projects = [
+  // QQShare
+  {
+    id: 4,
+    title: "QQShare",
+    github: "https://github.com/Mudityadev/QQShare-OneTime-Secure-File-Sharing",
+    description: (
+      <ul className="list-none space-y-2">
+        <li className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-green-600" /> <b>Secure, one-time file sharing service</b></li>
+        <li className="flex items-center gap-2"><FileUp className="w-4 h-4 text-blue-600" /> Upload a file (≤ 100 MB), get a link, and share for a single download within 60 minutes</li>
+        <li className="flex items-center gap-2"><Lock className="w-4 h-4 text-gray-700" /> <b>100% client-side encryption</b> (AES-GCM-256, optional password)</li>
+        <li className="flex items-center gap-2"><Trash2 className="w-4 h-4 text-red-600" /> <b>One-time file sharing</b> (file deleted after first download)</li>
+      </ul>
+    ),
+    videoEmbed: "", // No YouTube video provided
+    likes: 53,
+    comments: []
+  },
+  // PainPain Ransomware PoC
+  {
+    id: 3,
+    title: "PainPain Ransomware PoC",
+    github: "https://github.com/Mudityadev/PainPain-Ransomware-PoC",
+    description: (
+      <ul className="list-none space-y-2">
+        <li className="flex items-center gap-2"><Puzzle className="w-4 h-4 text-pink-600" /> <b>Modular, educational PoC ransomware</b></li>
+        <li className="flex items-center gap-2"><Search className="w-4 h-4 text-blue-600" /> <b>Recursive file discovery</b> (configurable)</li>
+        <li className="flex items-center gap-2"><Lock className="w-4 h-4 text-gray-700" /> <b>AES encryption/decryption</b> (Fernet)</li>
+        <li className="flex items-center gap-2"><Monitor className="w-4 h-4 text-indigo-600" /> <b>Tkinter GUI</b> (ransom note, timer, payment instructions)</li>
+      </ul>
+    ),
+    videoEmbed: "https://www.youtube.com/embed/0KRUst9dbDk?si=Z8sisrBeoLvEV00t",
+    likes: 23,
+    comments: []
+  },
+  // QQPayment Gateway
   {
     id: 1,
     title: "QQPayment Gateway",
@@ -61,6 +96,7 @@ const projects = [
       }
     ]
   },
+  // Contactless Payment and Checkout System
   {
     id: 2,
     title: "Contactless Payment and Checkout System",
@@ -100,38 +136,6 @@ const projects = [
         ]
       }
     ]
-  },
-  {
-    id: 3,
-    title: "PainPain Ransomware PoC",
-    github: "https://github.com/Mudityadev/PainPain-Ransomware-PoC",
-    description: (
-      <ul className="list-none space-y-2">
-        <li className="flex items-center gap-2"><Puzzle className="w-4 h-4 text-pink-600" /> <b>Modular, educational PoC ransomware</b></li>
-        <li className="flex items-center gap-2"><Search className="w-4 h-4 text-blue-600" /> <b>Recursive file discovery</b> (configurable)</li>
-        <li className="flex items-center gap-2"><Lock className="w-4 h-4 text-gray-700" /> <b>AES encryption/decryption</b> (Fernet)</li>
-        <li className="flex items-center gap-2"><Monitor className="w-4 h-4 text-indigo-600" /> <b>Tkinter GUI</b> (ransom note, timer, payment instructions)</li>
-      </ul>
-    ),
-    videoEmbed: "https://www.youtube.com/embed/0KRUst9dbDk?si=Z8sisrBeoLvEV00t",
-    likes: 23,
-    comments: []
-  },
-  {
-    id: 4,
-    title: "QQShare",
-    github: "https://github.com/Mudityadev/QQShare-OneTime-Secure-File-Sharing",
-    description: (
-      <ul className="list-none space-y-2">
-        <li className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-green-600" /> <b>Secure, one-time file sharing service</b></li>
-        <li className="flex items-center gap-2"><FileUp className="w-4 h-4 text-blue-600" /> Upload a file (≤ 100 MB), get a link, and share for a single download within 60 minutes</li>
-        <li className="flex items-center gap-2"><Lock className="w-4 h-4 text-gray-700" /> <b>100% client-side encryption</b> (AES-GCM-256, optional password)</li>
-        <li className="flex items-center gap-2"><Trash2 className="w-4 h-4 text-red-600" /> <b>One-time file sharing</b> (file deleted after first download)</li>
-      </ul>
-    ),
-    videoEmbed: "", // No YouTube video provided
-    likes: 53,
-    comments: []
   }
 ];
 
