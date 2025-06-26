@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Briefcase, Code, Heart, MessageCircle, ThumbsUp, User, Send, AlertCircle, ExternalLink } from "lucide-react";
+import { Briefcase, Code, Heart, MessageCircle, ThumbsUp, User, Send, AlertCircle, ExternalLink, Trophy, ShoppingCart, Camera, Timer, Banknote, Link2, ShieldCheck, Zap, Puzzle, Search, Lock, Monitor, FileUp, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,7 +25,14 @@ const projects = [
     id: 1,
     title: "QQPayment Gateway",
     github: "https://github.com/Mudityadev/QQ-Payment-Gateway",
-    description: "Engineered a payment gateway, leveraging Solana Network and Web3, bridging fiat and cryptocurrency for SMEs. Integrated a double-spending deterrent via Solana's Proof of History (PoH) consensus. Enabled frictionless conversions between cryptocurrencies and fiat, democratizing payment choices for businesses.",
+    description: (
+      <ul className="list-none space-y-2">
+        <li className="flex items-center gap-2"><Banknote className="w-4 h-4 text-green-600" /> <b>Solana + Web3 payment gateway</b> for SMEs</li>
+        <li className="flex items-center gap-2"><Link2 className="w-4 h-4 text-blue-600" /> <b>Fiat & crypto bridging</b> with seamless conversion</li>
+        <li className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-yellow-600" /> <b>Double-spending deterrent</b> via Solana PoH</li>
+        <li className="flex items-center gap-2"><Zap className="w-4 h-4 text-purple-600" /> <b>Frictionless payments</b> for businesses</li>
+      </ul>
+    ),
     videoEmbed: "https://www.youtube.com/embed/aW69AcN6NV4?si=GwIsM3W6EWPrPD44",
     likes: 42,
     comments: [
@@ -58,7 +65,14 @@ const projects = [
     id: 2,
     title: "Contactless Payment and Checkout System",
     github: "https://github.com/Mudityadev/Justwalkout-Cashierless-checkout-system",
-    description: "Semi-Finalist, Microsoft Imagine Cup Hackathon 2021. Designed high-performance web applications harnessing Django Rest Framework. Amplified store security by 40% with a virtual cart system, integrating cameras and weight sensors, deterring shoplifting. Slashed checkout queues by 60% with a Face ID-based contactless payment system, elevating shopping experiences.",
+    description: (
+      <ul className="list-none space-y-2">
+        <li className="flex items-center gap-2"><Trophy className="w-4 h-4 text-yellow-500" /> <b>Microsoft Imagine Cup Hackathon Semi-Finalist</b></li>
+        <li className="flex items-center gap-2"><ShoppingCart className="w-4 h-4 text-blue-500" /> Contactless checkout with Face ID</li>
+        <li className="flex items-center gap-2"><Camera className="w-4 h-4 text-green-500" /> Camera & weight sensor integration for security</li>
+        <li className="flex items-center gap-2"><Timer className="w-4 h-4 text-purple-500" /> 60% reduction in checkout queues</li>
+      </ul>
+    ),
     videoEmbed: "https://www.youtube.com/embed/3PC0bQzyaNA?si=zx1QjtD0n7BBP4zh",
     likes: 38,
     comments: [
@@ -86,6 +100,38 @@ const projects = [
         ]
       }
     ]
+  },
+  {
+    id: 3,
+    title: "PainPain Ransomware PoC",
+    github: "https://github.com/Mudityadev/PainPain-Ransomware-PoC",
+    description: (
+      <ul className="list-none space-y-2">
+        <li className="flex items-center gap-2"><Puzzle className="w-4 h-4 text-pink-600" /> <b>Modular, educational PoC ransomware</b></li>
+        <li className="flex items-center gap-2"><Search className="w-4 h-4 text-blue-600" /> <b>Recursive file discovery</b> (configurable)</li>
+        <li className="flex items-center gap-2"><Lock className="w-4 h-4 text-gray-700" /> <b>AES encryption/decryption</b> (Fernet)</li>
+        <li className="flex items-center gap-2"><Monitor className="w-4 h-4 text-indigo-600" /> <b>Tkinter GUI</b> (ransom note, timer, payment instructions)</li>
+      </ul>
+    ),
+    videoEmbed: "https://www.youtube.com/embed/0KRUst9dbDk?si=Z8sisrBeoLvEV00t",
+    likes: 23,
+    comments: []
+  },
+  {
+    id: 4,
+    title: "QQShare",
+    github: "https://github.com/Mudityadev/QQShare-OneTime-Secure-File-Sharing",
+    description: (
+      <ul className="list-none space-y-2">
+        <li className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-green-600" /> <b>Secure, one-time file sharing service</b></li>
+        <li className="flex items-center gap-2"><FileUp className="w-4 h-4 text-blue-600" /> Upload a file (≤ 100 MB), get a link, and share for a single download within 60 minutes</li>
+        <li className="flex items-center gap-2"><Lock className="w-4 h-4 text-gray-700" /> <b>100% client-side encryption</b> (AES-GCM-256, optional password)</li>
+        <li className="flex items-center gap-2"><Trash2 className="w-4 h-4 text-red-600" /> <b>One-time file sharing</b> (file deleted after first download)</li>
+      </ul>
+    ),
+    videoEmbed: "", // No YouTube video provided
+    likes: 53,
+    comments: []
   }
 ];
 
@@ -443,21 +489,40 @@ export function Profile() {
                           <span>GitHub</span>
                           <ExternalLink className="w-3 h-3" />
                         </Link>
+                        {project.title === "QQShare" && (
+                          <Link
+                            href="https://qq-share.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs border border-border/50 bg-background/50 hover:bg-green-100 hover:border-green-400 text-green-700 hover:text-green-900 rounded-full px-3 py-1 transition-all duration-200"
+                          >
+                            <span>Web Demo</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </Link>
+                        )}
                       </div>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-6">{project.description}</p>
                       
-                      {/* Video Embed */}
+                      {/* Video/Image Preview */}
                       <div className="relative w-full overflow-hidden rounded-2xl border border-border/20 shadow-lg mb-4">
                         <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                          <iframe
-                            className="absolute top-0 left-0 w-full h-full"
-                            src={project.videoEmbed}
-                            title={`${project.title} Demo`}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            allowFullScreen
-                          />
+                          {project.title === "QQShare" ? (
+                            <img
+                              src="/QQShare_Demo.jpg"
+                              alt="QQShare Demo"
+                              className="absolute top-0 left-0 w-full h-full object-cover"
+                            />
+                          ) : (
+                            <iframe
+                              className="absolute top-0 left-0 w-full h-full"
+                              src={project.videoEmbed}
+                              title={`${project.title} Demo`}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              referrerPolicy="strict-origin-when-cross-origin"
+                              allowFullScreen
+                            />
+                          )}
                         </div>
                       </div>
 
