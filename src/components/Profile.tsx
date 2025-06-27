@@ -145,6 +145,7 @@ const experience = [
     id: 1,
     role: "QA Associate Engineer",
     company: "Reliance Jio Platforms",
+    logo: "/jio.png",
     location: "Hyderabad, Telangana",
     duration: "Aug 2019– May 2023",
     points: [
@@ -175,6 +176,7 @@ const experience = [
     id: 2,
     role: "Software Engineer Intern",
     company: "Persistent Systems",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/5b/Persistent_Systems_Logo.png",
     location: "Remote",
     duration: "April 2022– June 2022",
     points: [
@@ -197,6 +199,7 @@ const experience = [
     id: 3,
     role: "Cyber Security Intern",
     company: "Cisco Network",
+    logo: "/cisco.png",
     location: "Remote",
     duration: "April 2021– July 2021",
     points: [
@@ -461,7 +464,10 @@ export function Profile() {
                           <h3 className="font-semibold text-foreground text-lg">{exp.role}</h3>
                           <Badge variant="secondary" className="text-xs bg-muted/50 border-border/30 rounded-full px-3 py-1">{exp.duration}</Badge>
                         </div>
-                        <p className="text-sm text-primary font-medium mb-3">{exp.company} – {exp.location}</p>
+                        <p className="text-sm text-primary font-medium mb-3 flex items-center gap-2">
+                          <img src={exp.logo} alt={exp.company + ' logo'} className="w-6 h-6 rounded-full object-contain bg-white border border-border/30" />
+                          {exp.company} – {exp.location}
+                        </p>
                         <ul className="text-sm text-muted-foreground space-y-2 mb-4">
                           {exp.points.map((point, pointIndex) => (
                             <li key={pointIndex} className="flex items-start gap-3">
