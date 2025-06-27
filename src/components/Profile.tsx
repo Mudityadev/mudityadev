@@ -176,7 +176,7 @@ const experience = [
     id: 2,
     role: "Software Engineer Intern",
     company: "Persistent Systems",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/5b/Persistent_Systems_Logo.png",
+    logo: "/persistentsys.png",
     location: "Remote",
     duration: "April 2022– June 2022",
     points: [

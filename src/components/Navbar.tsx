@@ -75,6 +75,12 @@ export default function Navbar() {
                 Download CV
               </a>
             </Button>
+            <Button variant="outline" asChild size="sm" className="apple-button border-border/50 hover:bg-green-100 text-green-700 hover:text-green-900">
+              <a href="https://cal.com/mudityadev/15min" target="_blank" rel="noopener noreferrer">
+                <Clock className="w-4 h-4 mr-2" />
+                Book 15min Meeting
+              </a>
+            </Button>
             <Dialog open={isContactModalOpen} onOpenChange={setContactModalOpen}>
               <DialogTrigger asChild>
                 <Button size="sm" className="apple-button bg-primary hover:bg-primary/90 shadow-sm">
@@ -164,6 +170,12 @@ export default function Navbar() {
                 <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
                   <Download className="w-4 h-4 mr-2" />
                   Resume
+                </a>
+              </Button>
+              <Button variant="outline" asChild className="apple-button border-border/50 hover:bg-green-100 text-green-700 hover:text-green-900">
+                <a href="https://cal.com/mudityadev/15min" target="_blank" rel="noopener noreferrer">
+                  <Clock className="w-4 h-4 mr-2" />
+                  Book 15min Meeting
                 </a>
               </Button>
               <Dialog open={isContactModalOpen} onOpenChange={setContactModalOpen}>
