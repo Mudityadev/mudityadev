@@ -147,7 +147,7 @@ const experience = [
     company: "Reliance Jio Platforms",
     logo: "/jio.png",
     location: "Hyderabad, Telangana",
-    duration: "Aug 2019– May 2023",
+    duration: "Nov 2023 – May 2025",
     points: [
       { icon: <FlaskConical className="w-4 h-4 text-blue-600" />, text: "Automated feature and functional testing using advanced LLM in Automator AI" },
       { icon: <CloudCog className="w-4 h-4 text-green-600" />, text: "Enhanced REST API testing for improved application reliability" },
