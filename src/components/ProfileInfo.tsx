@@ -12,30 +12,33 @@ import { Skeleton } from "@/components/ui/Skeleton";
 const dummyBlogs = [
   {
     id: 1,
-    title: "Israel-Iran Tensions: A Deep Dive into Regional Dynamics",
-    excerpt: "Analyzing the complex geopolitical landscape between Israel and Iran, examining historical tensions, nuclear concerns, and the impact on Middle East stability...",
-    date: "2024-01-15",
-    readTime: "7 min read",
-    category: "Geopolitics",
-    thumbnail: "/israel-war.jpg"
+    title: "Why does India matter to the global crypto future?",
+    excerpt: "With 1.4 billion people, 650 million internet users, a booming UPI-led digital payments ecosystem, and an entrepreneurial middle class, India isn't just an emerging market — it's the market.",
+    date: "2024-06-01",
+    readTime: "6 min read",
+    category: "Crypto & India",
+    thumbnail: "/share_market_india.jpg",
+    link: "https://medium.com/@muditya.defi/why-does-india-matter-to-the-global-crypto-future-d475e662659a"
   },
   {
     id: 2,
-    title: "Ukraine-Russia Conflict: The Evolution of Modern Warfare",
-    excerpt: "Analyzing the technological and strategic developments in the Ukraine-Russia conflict, from drone warfare to cyber attacks and their global implications...",
-    date: "2024-01-20",
-    readTime: "9 min read",
-    category: "War Analysis",
-    thumbnail: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&h=200&fit=crop&crop=center"
+    title: "How Modern Warfare is Reshaping Crypto Pricing, Policy, Protocols, and the Future of L2/L3 Systems",
+    excerpt: "The war became a real-time stress test for decentralized systems, from Bitcoin's mempool congestion during relief campaigns to DeFi protocols handling sudden capital flight. The battleground wasn't just Donbas — it was also smart contracts, Layer-2 rollups, and wallet anonymity guarantees. This is modern warfare. It's asymmetric, hybrid, and increasingly waged not just with tanks and drones, but with block explorers, liquidity pools, and zero-knowledge proofs.",
+    date: "2024-05-20",
+    readTime: "8 min read",
+    category: "Crypto & Warfare",
+    thumbnail: "/riyadh_crypto.jpg",
+    link: "https://medium.com/@muditya.defi/how-modern-warfare-is-reshaping-crypto-pricing-policy-protocols-and-the-future-of-l2-l3-systems-c0b3999f11a2"
   },
   {
     id: 3,
-    title: "The Gaza Crisis: Humanitarian Impact and International Response",
-    excerpt: "Examining the humanitarian consequences of the Gaza conflict, international aid efforts, and the challenges of providing assistance in conflict zones...",
-    date: "2024-01-18",
-    readTime: "10 min read",
-    category: "Humanitarian",
-    thumbnail: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop&crop=center"
+    title: "Israel-Iran Tensions: A Playbook for Navigating Market Turmoil",
+    excerpt: "Israel's shadow war with Iran just went overt — and global markets flinched. For traders, these aren't just headlines; they're alpha signals wrapped in geopolitical noise.",
+    date: "2024-04-15",
+    readTime: "7 min read",
+    category: "Geopolitics",
+    thumbnail: "/israel_iran_war.jpg",
+    link: "https://medium.com/@muditya.defi/israel-iran-tensions-a-playbook-for-navigating-market-turmoil-872bba816153"
   }
 ];
 
@@ -127,9 +130,10 @@ export function ProfileInfo({ loading = false }: { loading?: boolean }) {
                   {/* Blog Title */}
                   <h3 
                     className="font-semibold text-sm leading-tight text-foreground group-hover:text-primary transition-colors cursor-pointer line-clamp-2"
-                    onClick={() => handleBlogClick(blog.title)}
                   >
-                    {blog.title}
+                    <a href={blog.link} target="_blank" rel="noopener noreferrer">
+                      {blog.title}
+                    </a>
                   </h3>
 
                   {/* Blog Excerpt */}
@@ -142,10 +146,12 @@ export function ProfileInfo({ loading = false }: { loading?: boolean }) {
                     variant="ghost" 
                     size="sm" 
                     className="h-7 px-3 text-xs text-primary hover:text-primary/80 hover:bg-primary/5 rounded-full transition-all duration-200 p-0"
-                    onClick={() => handleBlogClick(blog.title)}
+                    asChild
                   >
-                    Read More
-                    <ArrowRight className="h-3 w-3 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
+                    <a href={blog.link} target="_blank" rel="noopener noreferrer">
+                      Read More
+                      <ArrowRight className="h-3 w-3 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
+                    </a>
                   </Button>
                 </div>
               </article>
@@ -158,9 +164,12 @@ export function ProfileInfo({ loading = false }: { loading?: boolean }) {
                 size="sm" 
                 className="w-full text-xs apple-button border-border/50 hover:bg-muted/50 rounded-full"
                 onClick={() => handleBlogClick("All Blog Posts")}
+                asChild
               >
-                View All Blog Posts
-                <ArrowRight className="h-3 w-3 ml-1" />
+                <a href="https://medium.com/@muditya.defi" target="_blank" rel="noopener noreferrer">
+                  View All Blog Posts
+                  <ArrowRight className="h-3 w-3 ml-1" />
+                </a>
               </Button>
             </div>
           </div>
