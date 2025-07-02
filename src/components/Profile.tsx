@@ -19,6 +19,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { DeFiAlert } from "@/components/ui/DeFiAlert";
 // import { supabase } from '@/lib/supabaseClient';
 
 const projects = [
@@ -425,6 +426,7 @@ export function Profile() {
 
           {/* Right Side - Content */}
           <div className="lg:w-2/3 space-y-6">
+            <DeFiAlert />
             {/* Experience Section */}
             <Card className="apple-card border-border/30 shadow-lg">
               <CardHeader className="pb-4">
