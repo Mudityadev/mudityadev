@@ -59,36 +59,20 @@ const Gallery: React.FC<GalleryProps> = ({ files }) => {
         </div>
       </div>
 
-      {/* Videos Section */}
-      {videos.length > 0 && (
-        <div>
-          <h2 className="text-2xl font-bold mb-6 text-center">Videos</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {videos.map((file, vIdx) => (
-              <button
-                key={file}
-                className="w-full rounded-xl bg-muted shadow overflow-hidden flex flex-col items-center hover:shadow-lg transition-shadow duration-200"
-                onClick={() => { setOpen(true); setIndex(images.length + vIdx); }}
-                style={{ cursor: 'pointer' }}
-              >
-                <div className="relative w-full aspect-video bg-black rounded-xl overflow-hidden">
-                  <video
-                    src={`/gallery/${file}`}
-                    controls
-                    className="w-full h-full rounded-xl"
-                    preload="metadata"
-                    style={{ background: '#000' }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <svg className="w-16 h-16 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                  </div>
-                </div>
-                <div className="text-xs text-muted-foreground mt-2 px-2 pb-2 truncate w-full text-center">{file}</div>
-              </button>
-            ))}
-          </div>
+      {/* YouTube Playlist Section */}
+      <div>
+        <h2 className="text-2xl font-bold mb-6 text-center">Latest YouTube Playlist</h2>
+        <div className="w-full aspect-video rounded-xl overflow-hidden shadow-sm bg-black flex items-center justify-center">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLjdtd3kR8j1wulmJ3ni5mCng4m1v8CZri"
+            title="Muditya Raghav YouTube Playlist"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="w-full h-full"
+          />
         </div>
-      )}
+      </div>
       <Lightbox
         open={open}
         close={() => setOpen(false)}
