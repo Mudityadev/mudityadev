@@ -15,11 +15,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import ContactForm from './ContactForm';
+import Gallery from './Gallery';
 
-export default function Navbar() {
+const galleryFiles = [
+  '1.png','10.png','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg','16.jpg','17.jpg','18.jpg','19.jpg','2.png','20.jpg','21.jpg','22.jpg','23.jpg','24.jpg','25.jpg','26.jpg','27.jpg','28.jpg','29.jpg','3.jpg','30.jpg','31.jpg','32.jpg','33.jpg','34.jpg','35.jpg','36.jpg','37.png','38.png','39.png','4.jpg','40.png','41.png','42.png','43.png','44.png','45.png','46.png','47.mp4','48.mp4','49.jpeg','5.jpg','50.jpeg','51.jpeg','52.jpeg','53.png','54.png','55.jpg','56.gif','57.mp4','58.jpg','59.jpg','6.jpg','60.png','61.mp4','62.png','7.png','8.jpg','9.jpg'
+];
+
+export default function Navbar({ onGalleryClick, onLogoClick }: { onGalleryClick?: () => void, onLogoClick?: () => void }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactModalOpen, setContactModalOpen] = useState(false);
+  // Remove login modal state
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  // Remove isGalleryOpen
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -34,7 +41,7 @@ export default function Navbar() {
             <Link 
               href="/" 
               className="flex items-center space-x-3 text-xl font-bold text-foreground hover:text-primary transition-all duration-300"
-              onClick={closeMenu}
+              onClick={e => { closeMenu(); if (onLogoClick) onLogoClick(); }}
             >
               <div className="relative">
                 <Avatar className="w-10 h-10 ring-2 ring-border/20">
@@ -69,11 +76,9 @@ export default function Navbar() {
                 <Github className="w-5 h-5" />
               </a>
             </Button>
-            <Button variant="outline" asChild size="sm" className="apple-button border-border/50 hover:bg-muted/50">
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                <Download className="w-4 h-4 mr-2" />
-                Download CV
-              </a>
+            <Button variant="outline" size="sm" className="apple-button border-border/50 hover:bg-blue-100 text-blue-700 hover:text-blue-900" onClick={onGalleryClick}>
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 17l6-6 4 4 8-8"/></svg>
+              Gallery
             </Button>
             <Button variant="outline" asChild size="sm" className="apple-button border-border/50 hover:bg-green-100 text-green-700 hover:text-green-900">
               <a href="https://cal.com/mudityadev/15min" target="_blank" rel="noopener noreferrer">
@@ -98,39 +103,7 @@ export default function Navbar() {
                 <ContactForm onSuccess={() => setContactModalOpen(false)} />
               </DialogContent>
             </Dialog>
-            <Dialog open={isLoginModalOpen} onOpenChange={setLoginModalOpen}>
-              <DialogTrigger asChild>
-                <Button variant="outline" size="sm" className="apple-button border-border/50 hover:bg-muted/50">
-                  <LogIn className="w-4 h-4 mr-2" />
-                  Login
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] apple-card">
-                <DialogHeader>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-3 bg-orange-500/10 rounded-full">
-                      <Clock className="h-6 w-6 text-orange-500" />
-                    </div>
-                    <div>
-                      <DialogTitle className="text-xl">Coming Soon</DialogTitle>
-                      <DialogDescription className="text-sm">
-                        We're working hard on this feature
-                      </DialogDescription>
-                    </div>
-                  </div>
-                </DialogHeader>
-                <div className="text-center py-6">
-                  <p className="text-muted-foreground mb-4">
-                    Our login system is currently under development. Soon you'll be able to create an account and interact with the community!
-                  </p>
-                  <div className="p-4 bg-muted/30 rounded-xl border border-border/20">
-                    <p className="text-sm text-muted-foreground">
-                      Stay tuned for updates on social media
-                    </p>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
+            {/* Remove Login Dialog */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -166,11 +139,9 @@ export default function Navbar() {
                   <Github className="w-5 h-5" />
                 </a>
               </Button>
-              <Button variant="outline" asChild className="apple-button border-border/50 hover:bg-muted/50">
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                  <Download className="w-4 h-4 mr-2" />
-                  Resume
-                </a>
+              <Button variant="outline" className="apple-button border-border/50 hover:bg-blue-100 text-blue-700 hover:text-blue-900" onClick={onGalleryClick}>
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 17l6-6 4 4 8-8"/></svg>
+                Gallery
               </Button>
               <Button variant="outline" asChild className="apple-button border-border/50 hover:bg-green-100 text-green-700 hover:text-green-900">
                 <a href="https://cal.com/mudityadev/15min" target="_blank" rel="noopener noreferrer">
@@ -195,43 +166,12 @@ export default function Navbar() {
                   <ContactForm onSuccess={() => setContactModalOpen(false)} />
                 </DialogContent>
               </Dialog>
-              <Dialog open={isLoginModalOpen} onOpenChange={setLoginModalOpen}>
-                <DialogTrigger asChild>
-                  <Button variant="outline" className="apple-button border-border/50 hover:bg-muted/50">
-                    <LogIn className="w-4 h-4 mr-2" />
-                    Login
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px] apple-card">
-                  <DialogHeader>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="p-3 bg-orange-500/10 rounded-full">
-                        <Clock className="h-6 w-6 text-orange-500" />
-                      </div>
-                      <div>
-                        <DialogTitle className="text-xl">Coming Soon</DialogTitle>
-                        <DialogDescription className="text-sm">
-                          We're working hard on this feature
-                        </DialogDescription>
-                      </div>
-                    </div>
-                  </DialogHeader>
-                  <div className="text-center py-6">
-                    <p className="text-muted-foreground mb-4">
-                      Our login system is currently under development. Soon you'll be able to create an account and interact with the community!
-                    </p>
-                    <div className="p-4 bg-muted/30 rounded-xl border border-border/20">
-                      <p className="text-sm text-muted-foreground">
-                        Stay tuned for updates on social media
-                      </p>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
+              {/* Remove Login Dialog from mobile menu */}
             </div>
           </div>
         )}
       </div>
+      {/* Remove <Dialog open={isGalleryOpen} ...> for Gallery */}
     </nav>
   );
 } 
