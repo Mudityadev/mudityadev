@@ -104,6 +104,9 @@ export default function Navbar({ onGalleryClick, onLogoClick }: { onGalleryClick
             {/* Remove Login Dialog */}
           </div>
 
+
+
+
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
             {/* Total Visits Counter - Mobile */}
