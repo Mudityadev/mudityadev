@@ -23,7 +23,7 @@ const Gallery: React.FC<GalleryProps> = ({ files }) => {
     })),
     ...videos.map((file) => ({
       type: 'video' as const,
-      poster: '/gallery/' + file.replace(/\.(mp4|webm|ogg)$/i, '.jpg'), // fallback poster
+      poster: '/gallery/' + file.replace(/\.(mp4|webm|ogg)$/i, '.jpg'),
       sources: [
         { src: `/gallery/${file}`, type: `video/${file.split('.').pop()}` },
       ],
@@ -33,32 +33,26 @@ const Gallery: React.FC<GalleryProps> = ({ files }) => {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
-  // Helper to randomly assign larger grid spans for some images (masonry-like)
-  const getImageGridClass = (idx: number) => {
-    if (idx % 7 === 0) return 'col-span-2 row-span-2';
-    if (idx % 11 === 0) return 'col-span-2';
-    return '';
-  };
-
   return (
     <div className="space-y-12">
       {/* Images Section */}
       <div>
         <h2 className="text-2xl font-bold mb-6 text-center">Images</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {/* Masonry layout */}
+        <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2 [column-fill:_balance]">
           {images.map((file, idx) => (
             <button
               key={file}
-              className={`relative w-full overflow-hidden rounded-xl bg-muted flex items-center justify-center shadow group aspect-[4/3] ${getImageGridClass(idx)}`}
+              className="mb-2 w-full break-inside-avoid rounded-xl overflow-hidden shadow-sm bg-muted group hover:shadow-lg transition-shadow duration-200"
               onClick={() => { setOpen(true); setIndex(idx); }}
               style={{ cursor: 'zoom-in' }}
             >
               <img
                 src={`/gallery/${file}`}
                 alt={file}
-                className="object-contain w-full h-full max-h-[70vh] transition-transform duration-200 group-hover:scale-105"
+                className="w-full h-auto object-cover transition-transform duration-200 group-hover:scale-105"
                 loading="lazy"
-                style={{ maxWidth: '100%', maxHeight: '70vh' }}
+                style={{ display: 'block' }}
               />
             </button>
           ))}
@@ -69,11 +63,11 @@ const Gallery: React.FC<GalleryProps> = ({ files }) => {
       {videos.length > 0 && (
         <div>
           <h2 className="text-2xl font-bold mb-6 text-center">Videos</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {videos.map((file, vIdx) => (
               <button
                 key={file}
-                className="w-full rounded-xl bg-muted shadow overflow-hidden flex flex-col items-center"
+                className="w-full rounded-xl bg-muted shadow overflow-hidden flex flex-col items-center hover:shadow-lg transition-shadow duration-200"
                 onClick={() => { setOpen(true); setIndex(images.length + vIdx); }}
                 style={{ cursor: 'pointer' }}
               >
