@@ -73,14 +73,15 @@ const Gallery: React.FC<GalleryProps> = ({ files }) => {
       {/* YouTube Playlist Section */}
       <div>
         <h2 className="text-2xl font-bold mb-6 text-center">Latest YouTube Playlist</h2>
-        <div className="w-full aspect-video rounded-xl overflow-hidden shadow-sm bg-black flex items-center justify-center">
+        <div className="w-full max-w-full aspect-video rounded-xl overflow-hidden shadow-sm bg-black flex items-center justify-center mx-auto">
           <iframe
             src="https://www.youtube.com/embed/videoseries?list=PLjdtd3kR8j1wulmJ3ni5mCng4m1v8CZri"
             title="Muditya Raghav YouTube Playlist"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
-            className="w-full h-full"
+            className="w-full h-full min-h-[200px] sm:min-h-[300px] md:min-h-[350px]"
+            style={{ aspectRatio: '16/9', maxWidth: '100%' }}
           />
         </div>
       </div>

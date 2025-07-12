@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import ContactForm from './ContactForm';
 import Gallery from './Gallery';
+import UserWeatherBadge from './ui/UserWeatherBadge';
 
 const galleryFiles = [
   '1.png','10.png','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg','16.jpg','17.jpg','18.jpg','19.jpg','2.png','20.jpg','21.jpg','22.jpg','23.jpg','24.jpg','25.jpg','26.jpg','27.jpg','28.jpg','29.jpg','3.jpg','30.jpg','31.jpg','32.jpg','33.jpg','34.jpg','35.jpg','36.jpg','37.png','38.png','39.png','4.jpg','40.png','41.png','42.png','43.png','44.png','45.png','46.png','47.mp4','48.mp4','49.jpeg','5.jpg','50.jpeg','51.jpeg','52.jpeg','53.png','54.png','55.jpg','56.gif','57.mp4','58.jpg','59.jpg','6.jpg','60.png','61.mp4','62.png','7.png','8.jpg','9.jpg'
@@ -57,10 +58,7 @@ export default function Navbar({ onGalleryClick, onLogoClick }: { onGalleryClick
             
             {/* Total Visits Counter - Desktop */}
             <div className="hidden md:flex items-center">
-              <Badge variant="secondary" className="flex items-center gap-1.5 px-4 py-2 bg-blue-500/10 text-blue-700 border-blue-200/50 hover:bg-blue-500/20 transition-all duration-200 rounded-full">
-                <Twitter className="w-3.5 h-3.5" />
-                <span className="text-xs font-medium">10k users</span>
-              </Badge>
+              <UserWeatherBadge />
             </div>
           </div>
 
@@ -109,10 +107,7 @@ export default function Navbar({ onGalleryClick, onLogoClick }: { onGalleryClick
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
             {/* Total Visits Counter - Mobile */}
-            <Badge variant="secondary" className="flex items-center gap-1 px-3 py-1.5 bg-blue-500/10 text-blue-700 border-blue-200/50 rounded-full">
-              <Twitter className="w-3 h-3" />
-              <span className="text-xs font-medium">10k</span>
-            </Badge>
+            <UserWeatherBadge />
             <Button
               variant="ghost"
               size="sm"
