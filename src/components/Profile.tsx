@@ -22,10 +22,6 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { DeFiAlert } from "@/components/ui/DeFiAlert";
 import Gallery from './Gallery';
 
-const galleryFiles = [
-  '1.png','10.png','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg','16.jpg','17.jpg','18.jpg','19.jpg','2.png','20.jpg','21.jpg','22.jpg','23.jpg','24.jpg','25.jpg','26.jpg','27.jpg','28.jpg','29.jpg','3.jpg','30.jpg','31.jpg','32.jpg','33.jpg','34.jpg','35.jpg','36.jpg','37.png','38.png','39.png','4.jpg','40.png','41.png','42.png','43.png','44.png','45.png','46.png','47.mp4','48.mp4','49.jpeg','5.jpg','50.jpeg','51.jpeg','52.jpeg','53.png','54.png','55.jpg','56.gif','57.mp4','58.jpg','59.jpg','6.jpg','60.png','61.mp4','62.png','7.png','8.jpg','9.jpg'
-];
-
 const projects = [
   // QQShare
   {
@@ -231,7 +227,7 @@ const experience = [
   }
 ];
 
-export function Profile({ showGallery = false, onCloseGallery }: { showGallery?: boolean, onCloseGallery?: () => void }) {
+export function Profile({ showGallery = false, onCloseGallery, files = [] }: { showGallery?: boolean, onCloseGallery?: () => void, files?: string[] }) {
   const [likedItems, setLikedItems] = useState<Set<string>>(new Set());
   const [showComments, setShowComments] = useState<Set<string>>(new Set());
   const [commentTexts, setCommentTexts] = useState<{ [key: string]: string }>({});
@@ -432,7 +428,7 @@ export function Profile({ showGallery = false, onCloseGallery }: { showGallery?:
           <div className="lg:w-2/3 space-y-6">
             {showGallery ? (
               <div>
-                <Gallery files={galleryFiles} />
+                <Gallery files={files} />
               </div>
             ) : (
               <>

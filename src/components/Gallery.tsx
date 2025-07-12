@@ -4,6 +4,7 @@ import Lightbox from 'yet-another-react-lightbox';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import Video from 'yet-another-react-lightbox/plugins/video';
 import 'yet-another-react-lightbox/styles.css';
+import { Skeleton } from '@/components/ui/Skeleton';
 
 interface GalleryProps {
   files: string[];
@@ -32,12 +33,16 @@ const Gallery: React.FC<GalleryProps> = ({ files }) => {
   ];
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState<{ [key: string]: boolean }>({});
 
   return (
     <div className="space-y-12">
       {/* Images Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-6 text-center">Images</h2>
+        <div className="mb-2 text-center">
+          <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-2 drop-shadow-sm">Gallery Images</h2>
+          <p className="text-base text-muted-foreground">A curated collection of my latest photos, graphics, and creative visuals.</p>
+        </div>
         {/* Masonry layout */}
         <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2 [column-fill:_balance]">
           {images.map((file, idx) => (
@@ -47,13 +52,19 @@ const Gallery: React.FC<GalleryProps> = ({ files }) => {
               onClick={() => { setOpen(true); setIndex(idx); }}
               style={{ cursor: 'zoom-in' }}
             >
-              <img
-                src={`/gallery/${file}`}
-                alt={file}
-                className="w-full h-auto object-cover transition-transform duration-200 group-hover:scale-105"
-                loading="lazy"
-                style={{ display: 'block' }}
-              />
+              <div className="relative w-full">
+                {!imageLoaded[file] && (
+                  <Skeleton className="w-full aspect-[4/3] h-auto min-h-[120px]" />
+                )}
+                <img
+                  src={`/gallery/${file}`}
+                  alt={file}
+                  className={`w-full h-auto object-cover transition-transform duration-200 group-hover:scale-105 ${!imageLoaded[file] ? 'hidden' : ''}`}
+                  loading="lazy"
+                  style={{ display: 'block' }}
+                  onLoad={() => setImageLoaded(l => ({ ...l, [file]: true }))}
+                />
+              </div>
             </button>
           ))}
         </div>
