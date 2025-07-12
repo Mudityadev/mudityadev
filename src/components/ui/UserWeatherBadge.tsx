@@ -62,9 +62,7 @@ export default function UserWeatherBadge() {
         {loading && <span className="flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading...</span>}
         {error && !loading && <span className="text-red-500">{error}</span>}
         {weather && !loading && (
-          <>
-            <span className="flex items-center gap-1 whitespace-nowrap"><Cloud className="w-3.5 h-3.5" /> {weather.temp}°C {weather.desc}</span>
-          </>
+          <span className="flex items-center gap-1 whitespace-nowrap"><Cloud className="w-3.5 h-3.5" /> {weather.temp}°C</span>
         )}
       </div>
     </div>
