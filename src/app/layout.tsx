@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Muditya Raghav - Full Stack Developer & International Relations Analyst",
+  title: "Muditya Raghav | AI Researcher | Autonomous Weapons | Diplomacy.",
   description: "Full Stack Developer passionate about creating innovative digital solutions with modern technologies. Specializing in Next.js, React, TypeScript, and Node.js. Also an International Relations analyst with expertise in geopolitical analysis.",
   keywords: ["Full Stack Developer", "React", "Next.js", "TypeScript", "Node.js", "Muditya Raghav", "International Relations", "Geopolitics", "Web Development", "Software Engineer"],
   authors: [{ name: "Muditya Raghav" }],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     apple: '/favicon.png',
   },
   openGraph: {
-    title: "Muditya Raghav - Full Stack Developer & International Relations Analyst",
+    title: "I am a AI Researcher. | interested in Autonomous Weapons | Diplomacy.",
     description: "Full Stack Developer passionate about creating innovative digital solutions with modern technologies. Specializing in Next.js, React, TypeScript, and Node.js. Also an International Relations analyst with expertise in geopolitical analysis.",
     type: "website",
     url: "https://mudityadev.com",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Muditya Raghav - Full Stack Developer & International Relations Analyst",
+    title: "I am a AI Researcher. | interested in Autonomous Weapons | Diplomacy.",
     description: "Full Stack Developer passionate about creating innovative digital solutions with modern technologies. Specializing in Next.js, React, TypeScript, and Node.js.",
     creator: "@Mudityadev",
     site: "@Mudityadev",

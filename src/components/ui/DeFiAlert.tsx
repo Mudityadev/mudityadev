@@ -13,12 +13,10 @@ export function DeFiAlert() {
           <CheckCircle2Icon className="text-green-600 w-6 h-6 flex-shrink-0 mt-1" />
           <div>
             <AlertTitle className="font-semibold text-xl bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-500 bg-clip-text text-transparent">
-              I am a AI Researcher.
+              I am a AI Researcher.<br />interested in Autonomous Weapons | Diplomacy.
             </AlertTitle>
             <AlertDescription>
-              <div className="mt-1 text-sm">
-                interested in Autonomous Weapons | Diplomacy.
-              </div>
+            
               <div className="flex items-center gap-5 mt-3">
                 <a
                   href="https://x.com/Muditya_DeFi"
