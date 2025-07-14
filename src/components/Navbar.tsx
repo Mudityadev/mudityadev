@@ -52,7 +52,7 @@ export default function Navbar({ onGalleryClick, onLogoClick }: { onGalleryClick
                 <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-background shadow-sm" />
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
-                <span className="font-semibold tracking-tight">Muditya Raghav</span>
+                <span className="font-semibold tracking-tight">Muditya AI</span>
               </div>
             </Link>
             
@@ -84,23 +84,13 @@ export default function Navbar({ onGalleryClick, onLogoClick }: { onGalleryClick
                 Book 15min Meeting
               </a>
             </Button>
-            <Dialog open={isContactModalOpen} onOpenChange={setContactModalOpen}>
-              <DialogTrigger asChild>
-                <Button size="sm" className="apple-button bg-primary hover:bg-primary/90 shadow-sm">
-                  <Send className="w-4 h-4 mr-2" />
-                  Message Me
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] apple-card">
-                <DialogHeader>
-                  <DialogTitle>Contact Me</DialogTitle>
-                  <DialogDescription>
-                    I'll get back to you as soon as possible.
-                  </DialogDescription>
-                </DialogHeader>
-                <ContactForm onSuccess={() => setContactModalOpen(false)} />
-              </DialogContent>
-            </Dialog>
+            <Button variant="outline" asChild size="sm" className="apple-button border-border/50 hover:bg-primary/10 text-primary hover:text-primary/80">
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                <Download className="w-4 h-4 mr-2" />
+                Resume
+              </a>
+            </Button>
+            {/* Contact Me modal removed */}
             {/* Remove Login Dialog */}
           </div>
 
@@ -147,23 +137,13 @@ export default function Navbar({ onGalleryClick, onLogoClick }: { onGalleryClick
                   Book 15min Meeting
                 </a>
               </Button>
-              <Dialog open={isContactModalOpen} onOpenChange={setContactModalOpen}>
-                <DialogTrigger asChild>
-                  <Button className="apple-button bg-primary hover:bg-primary/90 shadow-sm">
-                    <Send className="w-4 h-4 mr-2" />
-                    Message Me
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px] apple-card">
-                  <DialogHeader>
-                    <DialogTitle>Contact Me</DialogTitle>
-                    <DialogDescription>
-                      I'll get back to you as soon as possible.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <ContactForm onSuccess={() => setContactModalOpen(false)} />
-                </DialogContent>
-              </Dialog>
+              <Button variant="outline" asChild className="apple-button border-border/50 hover:bg-primary/10 text-primary hover:text-primary/80">
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                  <Download className="w-4 h-4 mr-2" />
+                  Resume
+                </a>
+              </Button>
+              {/* Contact Me modal removed from mobile menu */}
               {/* Remove Login Dialog from mobile menu */}
             </div>
           </div>

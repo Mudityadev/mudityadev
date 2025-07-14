@@ -27,8 +27,8 @@ export default function Footer() {
               © {currentYear} <span className="text-foreground font-semibold">Muditya Raghav</span>. All rights reserved.
             </p>
             <p className="text-xs text-muted-foreground/70 mt-2 tracking-wide">
-           Next.JS Developer DeFi Protocol Engineer | Smart Contracts on Solana & Solidity | Quantitative Trader 
-          </p>
+            I am a AI Researcher. interested in Autonomous Weapons | Diplomacy.
+           </p>
           </div>
 
           {/* Contact links */}
