@@ -57,7 +57,9 @@ export default function Navbar({ onGalleryClick, onLogoClick }: { onGalleryClick
             </Link>
             
             {/* Total Visits Counter - Desktop */}
-           
+            <div className="hidden md:flex items-center">
+              <UserWeatherBadge />
+            </div>
           </div>
 
           {/* Desktop Actions */}
